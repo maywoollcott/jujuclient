@@ -20,6 +20,10 @@ const Home: React.FC = () => {
     navigation.navigate('SendingJuju');
   };
 
+  const navigateToInbox = () => {
+    navigation.navigate('Inbox');
+  };
+
   return (
     <View style={styles.screenContainer}>
       <View style={styles.jujulContainer}>
@@ -33,7 +37,7 @@ const Home: React.FC = () => {
           widthUnits={0.6}
         />
         <SolidButton
-          onPress={() => console.log('read my jujus')}
+          onPress={navigateToInbox}
           buttonText='Read my jujus'
           widthUnits={0.6}
         />

@@ -4,6 +4,8 @@ import ContactList from '../screens/ContactList/ContactList';
 import Home from '../screens/Home/Home';
 import SendingJuju from '../screens/SendingJuju/SendingJuju';
 import PickJuju from '../screens/PickJuju/PickJuju';
+import ReadJuju from '../screens/ReadJuju/ReadJuju';
+import Inbox from '../screens/Inbox/Inbox';
 
 const HomeStack = createStackNavigator();
 
@@ -20,6 +22,8 @@ export const HomeNavigator = () => {
       <HomeStack.Screen name='SendingJuju' component={SendingJuju} />
       <HomeStack.Screen name='ContactList' component={ContactList} />
       <HomeStack.Screen name='PickJuju' component={PickJuju} />
+      <HomeStack.Screen name='ReadJuju' component={ReadJuju} />
+      <HomeStack.Screen name='Inbox' component={Inbox} />
     </HomeStack.Navigator>
   );
 };

@@ -25,6 +25,7 @@ export type Juju = {
   message: string;
   senderId: string;
   recipientPhoneNumber: string;
+  recipientContactName: string;
   opened: boolean;
   thanks?: string;
   dateSent: string;
@@ -35,6 +36,7 @@ export type JujuReqObject = {
   message: string;
   senderId: string;
   recipientPhoneNumber: string;
+  recipientContactName: string;
   opened: boolean;
   thanks?: string;
   dateSent: number;

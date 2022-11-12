@@ -1,4 +1,6 @@
 node_modules/
+key
+key.pub
 .expo/
 dist/
 .env

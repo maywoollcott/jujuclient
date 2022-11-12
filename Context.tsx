@@ -16,6 +16,8 @@ type AppContextValue = {
   setCurrentUser: Dispatch<SetStateAction<User>>;
   jujus: Juju[];
   setJujus: Dispatch<SetStateAction<Juju[]>>;
+  sentJujus: Juju[];
+  setSentJujus: Dispatch<SetStateAction<Juju[]>>;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   isAuthenticated: boolean;
@@ -34,6 +36,8 @@ const defaultValue: AppContextValue = {
   setCurrentUser: () => {},
   jujus: null,
   setJujus: () => {},
+  sentJujus: null,
+  setSentJujus: () => {},
   isLoading: false,
   setIsLoading: () => {},
   isAuthenticated: false,
@@ -51,6 +55,7 @@ export const Context = createContext(defaultValue);
 export const Provider = (props: any) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [jujus, setJujus] = useState(null);
+  const [sentJujus, setSentJujus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
@@ -159,6 +164,8 @@ export const Provider = (props: any) => {
         setCurrentUser: setCurrentUser,
         jujus: jujus,
         setJujus: setJujus,
+        sentJujus: sentJujus,
+        setSentJujus: setSentJujus,
         isLoading: isLoading,
         setIsLoading: setIsLoading,
         isAuthenticated: isAuthenticated,

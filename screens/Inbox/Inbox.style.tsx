@@ -3,8 +3,11 @@ import { COLORS } from '../../globalStyles';
 const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
-  screenContainer: {
+  safeAreaView: {
     flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  screenContainer: {
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: COLORS.white,
@@ -22,7 +25,6 @@ export const styles = StyleSheet.create({
     color: COLORS.primaryPurple,
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 10,
     fontWeight: '700',
   },
   subheaderContainer: {
@@ -44,11 +46,19 @@ export const styles = StyleSheet.create({
   },
   readJujuContainer: {
     width: '85%',
-    marginTop: height * 0.04,
+    flex: 1,
   },
   unreadDotContainer: {
     position: 'absolute',
     right: width * 0.04,
     top: 15,
+  },
+  envelopeContainer: {
+    position: 'absolute',
+    right: width * 0.07,
+    top: 28,
+  },
+  unreadJujuContainer: {
+    marginBottom: height * 0.03,
   },
 });

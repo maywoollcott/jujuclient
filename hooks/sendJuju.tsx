@@ -25,6 +25,7 @@ const useSendJuju = () => {
       message: jujuMessage.message,
       senderId: context.currentUser._id,
       recipientPhoneNumber: number,
+      recipientContactName: recipient.name,
       opened: false,
       dateSent: Date.now(),
     };

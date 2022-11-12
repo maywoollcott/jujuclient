@@ -5,17 +5,25 @@ import { useNavigation } from '@react-navigation/native';
 
 import * as apiService from '../api/apiService';
 import { Context } from '../Context';
-import { JujuReqObject, Message } from '../types';
+import { Juju, JujuReqObject, Message } from '../types';
 
 const useReadJuju = () => {
   const context = useContext(Context);
   const navigation = useNavigation();
 
-  const readJuju = async (id: string, updateObj: any) => {
+  const readJuju = async (id: string, updateObj: any, juju: Juju) => {
     let jujuIndex = context.jujus.map((juju) => juju._id).indexOf(id);
 
     context.setIsLoading(true);
     const storedToken = await SecureStore.getItemAsync('JUJU_AUTH_TOKEN');
+
+    const navigateToReadJuju = (juju: Juju, received: boolean) => {
+      navigation.navigate('ReadJuju', {
+        juju: juju,
+        received: received,
+      });
+    };
+
     try {
       const updateJujuRes = await apiService.updateJuju(
         id,
@@ -27,7 +35,7 @@ const useReadJuju = () => {
         console.log(updateJujuRes.updatedJuju);
         console.log('Successfully updated juju');
         context.jujus.splice(jujuIndex, 1, updateJujuRes.updatedJuju);
-        navigation.navigate('Home');
+        navigateToReadJuju(juju, true);
       } else {
         console.log('Network error. Please check your connection!');
       }

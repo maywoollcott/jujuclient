@@ -171,3 +171,34 @@ export const updateJuju = async (id: string, updateObj: any, token: string) => {
     };
   }
 };
+
+export const fetchJujus = async (phoneNumber: string, token: string) => {
+  try {
+    console.log('fetching jujus');
+    const { data, status } = await axios.post(
+      `${BASE_URL}/fetchjujus`,
+      { phoneNumber: phoneNumber },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log(data);
+    console.log(status);
+
+    return {
+      status: status,
+      jujus: data.jujus,
+      sentJujus: data.sentJujus,
+    };
+  } catch (error: any) {
+    const { message, response } = error;
+
+    return {
+      message: message,
+      status: response.status,
+    };
+  }
+};
