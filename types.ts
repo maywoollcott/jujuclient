@@ -7,6 +7,7 @@ export type User = {
   phoneNumber: string;
   dateJoined: string;
   jujuls: number;
+  pushNotificationsToken?: string;
 };
 
 export type Message = {

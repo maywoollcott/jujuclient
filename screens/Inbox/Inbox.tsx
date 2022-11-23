@@ -54,8 +54,14 @@ const Inbox: React.FC = () => {
     );
     if (fetchJujusRes.status === 200 && fetchJujusRes.jujus) {
       console.log(fetchJujusRes.sentJujus);
-      context.setJujus(fetchJujusRes.jujus);
-      context.setSentJujus(fetchJujusRes.sentJujus);
+      let sortedJujus = fetchJujusRes.jujus.sort((a, b) =>
+        a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0
+      );
+      context.setJujus(sortedJujus);
+      let sortedSentJujus = fetchJujusRes.sentJujus.sort((a, b) =>
+        a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0
+      );
+      context.setSentJujus(sortedSentJujus);
     } else {
       console.log('Issue refreshing jujus');
     }

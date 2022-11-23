@@ -11,6 +11,8 @@ const api =
     : `api.example.com`;
 const BASE_URL = `http://${api}`;
 
+//user
+
 export const signUp = async (user: SignUpUserReq) => {
   try {
     const { data, status } = await axios.post(`${BASE_URL}/signup`, {
@@ -91,6 +93,40 @@ export const logout = async (key: string) => {
   const result = await SecureStore.deleteItemAsync('DIVII_TOKEN_AUTH');
   return result;
 };
+
+export const updateUser = async (updateObj: any, token: string) => {
+  try {
+    console.log('updating juju apiservice');
+    const { data, status } = await axios.post(
+      `${BASE_URL}/updateuser`,
+      {
+        updateObj: updateObj,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log(data);
+    console.log(status);
+
+    return {
+      status: status,
+      updatedUser: data.newUser,
+    };
+  } catch (error: any) {
+    const { message, response } = error;
+
+    return {
+      message: message,
+      status: response.status,
+    };
+  }
+};
+
+//messages
 
 export const fetchAllMessages = async (token: string) => {
   try {

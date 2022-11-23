@@ -12,7 +12,7 @@ import { getUserByToken } from './api/apiService';
 import { Contact } from 'expo-contacts';
 
 type AppContextValue = {
-  currentUser: any;
+  currentUser: User;
   setCurrentUser: Dispatch<SetStateAction<User>>;
   jujus: Juju[];
   setJujus: Dispatch<SetStateAction<Juju[]>>;
@@ -78,7 +78,10 @@ export const Provider = (props: any) => {
         console.log(`user by token res ${userByTokenRes}`);
         if (userByTokenRes.user) {
           setCurrentUser(userByTokenRes.user);
-          setJujus(userByTokenRes.jujus);
+          let sortedJujus = userByTokenRes.jujus.sort((a, b) =>
+            a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0
+          );
+          setJujus(sortedJujus);
           setIsAuthenticated(true);
         } else {
           setCurrentUser(null);
@@ -106,7 +109,10 @@ export const Provider = (props: any) => {
         console.log(signUpRes.token);
         console.log('Successfully signed up!');
         setCurrentUser(signUpRes.user);
-        setJujus(signUpRes.jujus);
+        let sortedJujus = signUpRes.jujus.sort((a, b) =>
+          a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0
+        );
+        setJujus(sortedJujus);
         await SecureStore.setItemAsync('JUJU_AUTH_TOKEN', signUpRes.token);
         setIsAuthenticated(true);
       } else if (signUpRes.status === 409) {
@@ -134,7 +140,10 @@ export const Provider = (props: any) => {
         console.log(signInRes);
         console.log('Successfully signed in!');
         setCurrentUser(signInRes.user);
-        setJujus(signInRes.jujus);
+        let sortedJujus = signInRes.jujus.sort((a, b) =>
+          a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0
+        );
+        setJujus(sortedJujus);
         await SecureStore.setItemAsync('JUJU_AUTH_TOKEN', signInRes.token);
         setIsAuthenticated(true);
       } else if (signInRes.status === 409) {
